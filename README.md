@@ -25,28 +25,31 @@ A Claude Code slash command for naming projects, products, and companies.
 ## Repository contents
 
 ```
-name-wizard.md            # The /name-wizard slash command
+name-wizard.md              # The /name-wizard slash command
 agents/
-  creative-namer.md       # Generates broad pool of candidates
-  domain-hacker.md        # Generates TLD-as-word candidates
-  name-analyst.md         # Scores and tiers candidates
-  brand-strategist.md     # Deep-dive on shortlisted names
-install.sh                # One-shot installer for Claude Code
+  creative-namer.md         # Generates broad pool of candidates
+  domain-hacker.md          # Generates TLD-as-word candidates
+  name-analyst.md           # Scores and tiers candidates
+  brand-strategist.md       # Deep-dive on shortlisted names
+scripts/
+  check_domains.py          # Domain availability checker (stdlib only)
+install.sh                  # One-shot installer for Claude Code
 ```
 
 ## Install
 
-Run the installer (copies the command and all four sub-agents into your Claude Code config):
+Run the installer (copies the command, all four sub-agents, and the domain-check script into your Claude Code config):
 
 ```bash
 ./install.sh
 ```
 
-Or do it manually:
+Files land at:
 
-```bash
-cp name-wizard.md ~/.claude/commands/
-cp agents/*.md ~/.claude/agents/
+```
+~/.claude/commands/name-wizard.md
+~/.claude/agents/{creative-namer,domain-hacker,name-analyst,brand-strategist}.md
+~/.claude/name-wizard/check_domains.py
 ```
 
 Restart Claude Code (or open a new session) and `/name-wizard` will be available.
@@ -61,15 +64,30 @@ The skill prompts for the remaining context (buyers, competitors, tone) before g
 
 ## Domain check
 
-Step 4 uses Claude Code's built-in `WebFetch` tool to call the **Revved domain status API**:
+Step 4 of the workflow runs the bundled `check_domains.py` script via Bash:
 
+```bash
+~/.claude/name-wizard/check_domains.py foo.com bar.io baz.app
+# foo.com: AVAILABLE
+# bar.io: taken
+# baz.app: AVAILABLE
 ```
-https://domains.revved.com/v1/domainStatus?domains=foo.com,bar.io,baz.app
+
+The script:
+- Uses **only the Python standard library** (no `pip install` required, Python 3.8+)
+- Hits the public, unauthenticated **Revved domain status API** (`https://domains.revved.com/v1/domainStatus`)
+- Batches up to 25 domains per request internally — pass as many as you want
+- Accepts space-separated, comma-separated, or stdin (`-`) input
+- Prints stable `name: AVAILABLE|taken|unknown` lines, one per domain
+
+You can also run it standalone outside the skill:
+
+```bash
+./scripts/check_domains.py mutaris.com mutaris.io mutaris.ai
+echo "foo.com bar.io" | ./scripts/check_domains.py -
 ```
 
-This is a public, unauthenticated endpoint. No API key required, no script to install — `WebFetch` is built into Claude Code. The skill batches up to 25 domains per call.
-
-If you'd rather use a different domain availability service, edit step 4 of `name-wizard.md` to point at your preferred endpoint.
+If you'd rather use a different domain availability service, swap out the URL in `scripts/check_domains.py` — the response format expected is `{"status": [{"name": "...", "available": true|false}, ...]}`.
 
 ## Web research
 

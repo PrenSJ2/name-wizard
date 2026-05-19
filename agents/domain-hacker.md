@@ -16,9 +16,15 @@ The dispatching agent will give you:
 
 ## Hackable TLDs
 
-Use only these (real, registerable TLDs that work as word endings):
+Use any TLD from these two groups (all real and registerable, all usable as word endings):
 
-`.io .ly .ai .me .co .sh .is .it .to .im .in .us .al .am .at .be .de .es .gg .re .se .st .app .art .dev .live .lol .tech .pro .cloud .click .love .health .homes .xyz .shop .club .store .online .net .org .info .world`
+**ccTLD endings** (1-3 letters, often complete short word fragments):
+`.ac .ai .al .am .as .at .be .by .cc .ch .cm .co .de .es .fm .fr .gg .gs .hk .im .in .io .is .it .je .la .li .ly .me .mn .ms .mu .nl .nu .pe .pm .ps .pw .re .ru .sc .se .sh .si .sk .sm .so .st .tc .tk .tm .to .tv .uk .us .ws`
+
+**gTLD endings or whole words** (often spell the second half of a word or an entire word):
+`.app .art .bar .bet .bid .bio .blog .bot .cab .cafe .cam .car .care .cash .center .city .click .cloud .club .codes .cool .country .date .deal .design .dev .diet .digital .email .farm .fashion .fish .fit .fly .fun .fund .fyi .game .games .gift .gold .golf .green .guide .guru .health .help .homes .host .info .ink .kim .kiwi .land .law .life .link .live .lol .love .ltd .market .media .menu .mom .money .movie .name .net .news .now .online .org .party .pet .photo .pics .pink .pizza .place .plus .poker .press .pro .pub .rent .rest .rip .rocks .run .sale .salon .school .security .shop .show .site .soy .space .store .studio .style .surf .systems .tax .taxi .team .tech .tips .today .tools .top .tours .town .toys .trade .video .vip .wiki .win .wine .work .world .xyz .zone`
+
+Examples of strong hacks across both groups: `bit.ly` (bitly), `sn.app` (snap), `g.host` (ghost), `th.ink` (think), `voi.la` (voila), `del.icio.us` (delicious), `instagr.am` (instagram), `last.fm` (lastfm), `lap.top` (laptop), `sur.plus` (surplus), `is.land` (island), `cur.rent` (current), `out.fit` (outfit), `web.cam` (webcam).
 
 ## Approach
 
