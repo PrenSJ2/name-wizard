@@ -1,4 +1,4 @@
-# name-wizard
+# name-wizard-skill
 
 A Claude Code slash command for naming projects, products, and companies.
 
